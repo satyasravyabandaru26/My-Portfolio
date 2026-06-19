@@ -1,112 +1,289 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
 
-body{
-  height: 100vh;
+body {
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background:linear-gradient(135deg, #200122,red);
+  background: radial-gradient(circle at top left, rgba(99, 231, 255, 0.18), transparent 25%),
+    radial-gradient(circle at 92% 10%, rgba(138, 116, 255, 0.18), transparent 18%),
+    linear-gradient(135deg, #08101f 0%, #111d33 100%);
+  color: #e8f3ff;
+  overflow-x: hidden;
 }
 
-.container{
-  width: 90%;
-  height:80vh;
+.page-shapes {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+.shape {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.45;
+  filter: blur(22px);
+}
+
+.shape--large {
+  width: 200px;
+  height: 300px;
+  top: 30px;
+  left: -100px;
+  background: rgba(99, 231, 255, 0.18);
+}
+
+.shape--small {
+  width: 150px;
+  height: 150px;
+  bottom: 110px;
+  right: -50px;
+  background: rgba(138, 116, 255, 0.20);
+}
+
+.container {
+  max-width: 1300px;
+  min-height: 80vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 50px;
-  color: white;
-  background: rgba(0,0,0,0.4);
-  border-radius: 20px;
+  padding: 10px 70px;
+  background: linear-gradient(180deg, rgba(12, 24, 52, 0.96), rgba(18, 35, 68, 0.92));
+  border-radius: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.26);
 }
 
-.left{
+.left {
   width: 55%;
 }
 
-.left h1{
-  font-size: 50px;
-  margin-bottom: 50px;
+.eyebrow {
+  display: inline-block;
+  color: #63e7ff;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.82rem;
+  margin-bottom: 18px;
 }
 
-.quote{
-  font-size: 26px;
-  font-weight:bold;
-  margin-bottom: 20px;
+.left h1 {
+  font-size: clamp(3rem, 4vw, 4.4rem);
+  line-height: 1.02;
+  margin-bottom: 22px;
 }
 
-.sub-text{
-  font-size: 20px;
-  color: #ddd;
-  margin-bottom: 60px;
+.highlight {
+  color: #63e7ff;
 }
 
-.explore-text{
-  font-size: 22px;
-  margin-bottom: 20px;
+.quote {
+  font-size: 1.18rem;
+  line-height: 1.75;
+  max-width: 700px;
+  margin-bottom: 28px;
 }
 
-button{
-  padding: 15px 35px;
-  font-size:20px;
-  border:none;
-  border-radius: 10px;
-  background: white;
-  color: black;
+.sub-text,
+.explore-text {
+  color: #adb9d8;
+  margin-bottom: 18px;
+}
+
+button {
+  padding: 16px 38px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #63e7ff, #8a74ff);
+  color: #07101f;
+  font-size: 1rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: 0.3s;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 16px 40px rgba(99, 231, 255, 0.16);
 }
 
-button:hover{
-  transform: scale(1.05);
+button:hover {
+  transform: translateY(-2px);
 }
 
-.right{
+.right {
   text-align: center;
 }
 
-.right h2{
-  font-size: 45px;
-  margin-bottom: 50px;
+.right h2 {
+  font-size: clamp(2.2rem, 3vw, 3.2rem);
+  line-height: 1.05;
+  margin-top: 26px;
 }
 
-.photo-circle{
-  width:280px;
-  height:280px;
-  border: 5px solid white;
+.photo-circle {
+  width: 320px;
+  height: 320px;
   border-radius: 50%;
   overflow: hidden;
-  margin: auto;
+  border: 5px solid rgba(99, 231, 255, 0.45);
+  box-shadow: 0 24px 60px rgba(63, 103, 168, 0.24);
+  margin: 0 auto;
 }
 
-.photo-circle img{
+.photo-circle img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
+  display: block;
 }
 
 .social-icons {
-    position:fixed;
-    bottom: 20px;
-    width: 100%;
-    display: flex;
-    justify-content: left;
-    padding-left: 80px;
-    gap: 15px;
+  position: fixed;
+  left: 22px;
+  bottom: 22px;
+  display: flex;
+  gap: 16px;
+  padding: 22px;
 }
 
 .social-icons a {
-    color: white;
-    font-size: 26px;
-    margin-right: 15px;
-    transition: 0.3s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  color: #e8f3ff;
+  text-decoration: none;
+  transition: transform 0.2s ease, background 0.2s ease;
 }
 
 .social-icons a:hover {
-    transform: scale(1.2);
+  transform: translateY(-3px);
+  background: rgba(99, 231, 255, 0.18);
+}
+
+.resume-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.resume-btn p {
+  font-weight: 700;
+}
+
+.resume-btn span {
+  display: block;
+  font-size: 0.85rem;
+  color: #adb9d8;
+}
+
+.resume-btn a {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #63e7ff;
+  color: #07101f;
+  text-decoration: none;
+}
+
+.footer {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  color: #adb9d8;
+}
+
+.page2-body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #071721 0%, #111e33 100%);
+  padding: 20px;
+}
+
+.page2-panel {
+  width: min(100%, 900px);
+  padding: 30px;
+}
+
+.page2-card {
+  background: rgba(18, 35, 68, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 28px;
+  padding: 40px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.16);
+}
+
+.page2-card h1 {
+  font-size: clamp(2rem, 3vw, 3rem);
+  margin-bottom: 22px;
+}
+
+.page2-text {
+  color: #adb9d8;
+  line-height: 1.75;
+  margin-bottom: 30px;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #63e7ff, #8a74ff);
+  color: #07101f;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .left,
+  .right {
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 24px;
+  }
+
+  .photo-circle {
+    width: 240px;
+    height: 240px;
+  }
+
+  .social-icons {
+    gap: 12px;
+    left: 14px;
+    bottom: 14px;
+  }
+
+  .resume-btn {
+    padding: 12px 14px;
+  }
 }

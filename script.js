@@ -1,3 +1,3 @@
 document.getElementById("openPageBtn").addEventListener("click", function() {
-    window.open("page2.html", "_blank");
+  window.location.href = "page2.html";
 });
