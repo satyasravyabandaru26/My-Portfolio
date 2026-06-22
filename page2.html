@@ -45,12 +45,34 @@
           <p class="eyebrow">Skills</p>
           <h1>Skills</h1>
           <div class="skills-list">
-            <span>HTML</span>
-            <span>CSS</span>
-            <span>JavaScript</span>
-            <span>React</span>
-            <span>Java</span>
-            <span>Responsive Design</span>
+            <div class="skill-item">
+              <h2>HTML</h2>
+              <p>Structure / Content</p>
+            </div>
+            <div class="skill-item">
+              <h2>CSS</h2>
+              <p>Styling / Design</p>
+            </div>
+            <div class="skill-item">
+              <h2>JavaScript</h2>
+              <p>Interactivity / Functionality</p>
+            </div>
+            <div class="skill-item">
+              <h2>Python</h2>
+              <p>Automation / Programming</p>
+            </div>
+            <div class="skill-item">
+              <h2>Java</h2>
+              <p>Application Development / OOP</p>
+            </div>
+            <div class="skill-item">
+              <h2>GitHub</h2>
+              <p>Version Control / Collaboration</p>
+            </div>
+            <div class="skill-item">
+              <h2>VS Code</h2>
+              <p>Code Editor / Development</p>
+            </div>
           </div>
         </div>
 
@@ -114,5 +136,28 @@
 
     </div>
   </div>
+
+  <button class="scroll-top-btn" aria-label="Scroll to top">↑</button>
+
+  <script>
+    const scrollButton = document.querySelector('.scroll-top-btn');
+    const projectsSection = document.getElementById('projects');
+
+    const updateScrollButton = () => {
+      const threshold = projectsSection.offsetTop - 120;
+      if (window.scrollY >= threshold) {
+        scrollButton.classList.add('visible');
+      } else {
+        scrollButton.classList.remove('visible');
+      }
+    };
+
+    scrollButton.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    window.addEventListener('scroll', updateScrollButton);
+    window.addEventListener('load', updateScrollButton);
+  </script>
 </body>
 </html>
