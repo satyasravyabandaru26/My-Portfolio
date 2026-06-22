@@ -23,7 +23,7 @@
     <div class="page2-card">
 
       <div class="page2-nav">
-        <a href="main.html">Home</a>
+        <a href="index.html">Home</a>
         <a href="#about">About Me</a>
         <a href="#skills">Skills</a>
         <a href="#projects">Projects</a>
@@ -33,7 +33,7 @@
 
       <div class="page2-sections">
         <div class="page2-about-card" id="about">
-          <p class="eyebrow">About</p>
+          <p class="eyebrow"></p>
           <h1>About Me</h1>
           <p class="page2-about-text">
             I am a passionate Frontend Developer with strong knowledge of HTML, CSS, JavaScript, and React. I enjoy creating responsive and user-friendly web applications. Currently, I am expanding my skills in Java Full Stack Development and gaining practical experience through internships and projects.
@@ -42,7 +42,7 @@
         </div>
 
         <div class="page2-skills-card" id="skills">
-          <p class="eyebrow">Skills</p>
+          <p class="eyebrow"></p>
           <h1>Skills</h1>
           <div class="skills-list">
             <div class="skill-item">
@@ -69,49 +69,42 @@
               <h2>GitHub</h2>
               <p>Version Control / Collaboration</p>
             </div>
-            <div class="skill-item">
-              <h2>VS Code</h2>
-              <p>Code Editor / Development</p>
-            </div>
           </div>
         </div>
 
         <div class="page2-projects-card" id="projects">
-          <p class="eyebrow">Projects</p>
+          <p class="eyebrow"></p>
           <h1>Projects</h1>
           <div class="project-list">
             <div class="project-item">
               <h2>Portfolio Website</h2>
               <p>Developed a responsive developer portfolio with animations and project showcases.</p>
             </div>
-            <div class="project-item">
-              <h2>Task Manager</h2>
-              <p>Built a web app for adding, editing, and tracking tasks using JavaScript and local storage.</p>
-            </div>
           </div>
         </div>
 
         <div class="page2-certificates-card" id="certificates">
-          <p class="eyebrow">Certificates</p>
+          <p class="eyebrow"></p>
           <h1>Certificates</h1>
-          <div class="certificate-list">
-            <div class="certificate-item">
-              <h2>Responsive Web Design</h2>
-              <p>Completed certified training in responsive HTML, CSS, and JavaScript.</p>
-            </div>
-            <div class="certificate-item">
-              <h2>JavaScript Essentials</h2>
-              <p>Mastered modern JavaScript fundamentals and DOM scripting.</p>
-            </div>
-            <div class="certificate-item">
-              <h2>React Foundations</h2>
-              <p>Built interactive UI components and project-based applications.</p>
+          <div class="certificate-list" id="certificate-list"></div>
+          <div class="certificate-featured" id="certificate-featured" aria-hidden="false"></div>
+          <div class="certificate-modal hidden" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="certificate-modal-title">
+            <div class="certificate-modal-backdrop"></div>
+            <div class="certificate-modal-card">
+              <button class="certificate-modal-close" aria-label="Close certificate preview">×</button>
+              <div class="certificate-modal-image">
+                <img src="" alt="Certificate preview" />
+              </div>
+              <div class="certificate-modal-info">
+                <h2 id="certificate-modal-title"></h2>
+                <p></p>
+              </div>
             </div>
           </div>
         </div>
 
         <div class="page2-contact-card" id="contact">
-          <p class="eyebrow">Contact</p>
+          <p class="eyebrow"></p>
           <h1>Get in Touch</h1>
           <div class="contact-list">
             <div class="contact-item">
@@ -158,6 +151,96 @@
 
     window.addEventListener('scroll', updateScrollButton);
     window.addEventListener('load', updateScrollButton);
+
+    // Data-driven certificate list - add entries here for more certificates
+    const certificatesData = [
+      { src: 'certificate3.png', title: 'TATA Forage', desc: 'Gained practical experience in AI-powered data analytics and business insights.' },
+      { src: 'certificate4.png', title: 'EduSkills', desc: 'Earned Java Full Stack Internship certification from EduSkills.' },
+      { src: 'certificate1.png', title: 'ExcelR', desc: 'Completed a 30-hour Gen AI and Agentic AI training program by ExcelR.' },
+      { src: 'certificate2.png', title: 'Learnathon', desc: 'Participated in Learnathon 2025 by ICT Academy, enhancing technical and industry skills.' },
+      // add more items here: { src: 'my-cert.png', title: 'Title', desc: 'Description' }
+    ];
+
+    const featuredContainer = document.getElementById('certificate-featured');
+    const listContainer = document.getElementById('certificate-list');
+    const renderCertificates = () => {
+      featuredContainer.innerHTML = '';
+      listContainer.innerHTML = '';
+      certificatesData.forEach((c, idx) => {
+        const item = document.createElement('div');
+        item.className = 'certificate-item';
+        item.dataset.title = c.title;
+        item.dataset.desc = c.desc;
+        item.innerHTML = `
+          <div class="certificate-image"><img src="${c.src}" alt="${c.title} certificate" loading="lazy"/></div>
+          <h2>${c.title}</h2>
+          <p>${c.desc}</p>
+        `;
+        if (idx < 2) {
+          item.classList.add('featured');
+          featuredContainer.appendChild(item);
+        } else {
+          listContainer.appendChild(item);
+        }
+      });
+    };
+
+    renderCertificates();
+
+    // delegate selected items
+    const certificateModal = document.querySelector('.certificate-modal');
+    const certificateModalBackdrop = document.querySelector('.certificate-modal-backdrop');
+    const certificateModalClose = document.querySelector('.certificate-modal-close');
+    const certificateModalImage = document.querySelector('.certificate-modal-image img');
+    const certificateModalTitle = document.getElementById('certificate-modal-title');
+    const certificateModalDescription = document.querySelector('.certificate-modal-info p');
+
+    const openCertificateModal = (item) => {
+      const img = item.querySelector('.certificate-image img');
+      const title = item.dataset.title;
+      const desc = item.dataset.desc;
+
+      certificateModalImage.src = img.src;
+      certificateModalImage.alt = img.alt;
+      certificateModalTitle.textContent = title;
+      certificateModalDescription.textContent = desc;
+      certificateModal.classList.remove('hidden');
+      certificateModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      
+      // Scroll to certificates section
+      const certificatesSection = document.getElementById('certificates');
+      setTimeout(() => {
+        certificatesSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+    };
+
+    const closeCertificateModal = () => {
+      certificateModal.classList.add('hidden');
+      certificateModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    };
+
+    // delegate clicks (works for dynamic items)
+    listContainer.addEventListener('click', (e) => {
+      const item = e.target.closest('.certificate-item');
+      if (item) openCertificateModal(item);
+    });
+    featuredContainer.addEventListener('click', (e) => {
+      const item = e.target.closest('.certificate-item');
+      if (item) openCertificateModal(item);
+    });
+
+    certificateModalClose.addEventListener('click', closeCertificateModal);
+    certificateModalBackdrop.addEventListener('click', closeCertificateModal);
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !certificateModal.classList.contains('hidden')) {
+        closeCertificateModal();
+      }
+    });
+
+
+
   </script>
 </body>
 </html>
