@@ -104,7 +104,7 @@
                 Portfolio Website
               </h2>
               <div>
-                <h2>Portfolio Website</h2>
+
                 <p>Developed a responsive developer portfolio with animations and project showcases.</p>
               </div>
             </div>
@@ -120,7 +120,7 @@
             aria-labelledby="certificate-modal-title">
             <div class="certificate-modal-backdrop"></div>
             <div class="certificate-modal-card">
-              <button class="certificate-modal-close" aria-label="Close certificate preview">×</button>
+              <button class="certificate-modal-close" aria-label="Close certificate preview">&times;</button>
               <div class="certificate-modal-image">
                 <img src="" alt="Certificate preview" />
               </div>
@@ -172,7 +172,7 @@
 
             <section id="contact-form">
               <h2>Send a Message</h2>
-              <form action="submit_form.php" method="POST">
+              <form id="message-form">
                 <label for="name">Full Name:</label>
                 <input type="text" id="name" name="name" required>
 
@@ -184,6 +184,7 @@
                 <input type="email" id="email" name="email" required>
 
                 <button type="submit">Submit</button>
+                <p class="form-status" aria-live="polite"></p>
               </form>
             </section>
           </div>
@@ -193,7 +194,7 @@
     </div>
   </div>
 
-  <button class="scroll-top-btn" aria-label="Scroll to top">↑</button>
+  <button class="scroll-top-btn" aria-label="Scroll to top">&uarr;</button>
 
   <script>
     const scrollButton = document.querySelector('.scroll-top-btn');
@@ -214,6 +215,15 @@
 
     window.addEventListener('scroll', updateScrollButton);
     window.addEventListener('load', updateScrollButton);
+
+    const messageForm = document.getElementById('message-form');
+    const formStatus = document.querySelector('.form-status');
+
+    messageForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      formStatus.textContent = 'Thank you! Your message details are ready to share.';
+      messageForm.reset();
+    });
 
     // Data-driven certificate list - add entries here for more certificates
     const certificatesData = [
